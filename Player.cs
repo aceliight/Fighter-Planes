@@ -43,6 +43,7 @@ public class Player : MonoBehaviour
             transform.position = new Vector3(transform.position.x, transform.position.y * -1, 0);
         }
         */
+       // limits player movement vertically
         if (transform.position.y >= 1f)
         {
             transform.position = new Vector3(transform.position.x, 1f, 0);
@@ -50,6 +51,15 @@ public class Player : MonoBehaviour
         else if (transform.position.y <= -4f)
         {
             transform.position = new Vector3(transform.position.x, -4f, 0);
+        }
+        //limits player movement horizontally
+        if (transform.position.x >= 9.2f)
+        {
+            transform.position = new Vector3(9.2f, transform.position.y, 0);
+        }
+        else if (transform.position.x <= -9.2f)
+        {
+            transform.position = new Vector3(-9.2f, transform.position.y, 0);
         }
     }
 

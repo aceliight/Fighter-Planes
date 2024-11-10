@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public GameObject enemyOne;
     public GameObject cloud;
+    public GameObject coin;
 
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI livesText;
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Instantiate(player, transform.position, Quaternion.identity);
+        InvokeRepeating("CreateCoin", 1f, 5f);
         InvokeRepeating("CreateEnemyOne", 1f, 3f);
         CreateSky();
         score = 0;
@@ -33,6 +35,10 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
+    }
+    void CreateCoin()
+    {
+        Instantiate(coin, new Vector3(Random.Range(-8f, 8f), Random.Range(-3f, 3f), 0), Quaternion.Euler(0, 0, 0));
     }
 
     void CreateEnemyOne()

@@ -5,20 +5,20 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-    public float speed;
-    private int lives = 3;
-    private int score = 0;
-    public float horizontalInput;
-    public float verticalInput;
+    private float horizontalInput;
+    private float verticalInput;
+    private float horizontalScreenSize = 11.5f;
+    private float verticalScreenSize = 7.5f;
+    private float speed;
+    private int lives;
 
     public GameObject bullet;
 
     // Start is called before the first frame update
     void Start()
     {
-        //transform.position = new Vector3(Random.Range(0, 9), Random.Range(0, 9), Random.Range(0, 9));
-        speed = 5f;
-        
+        speed = 6f;
+        lives = 3;
     }
 
     // Update is called once per frame
@@ -28,48 +28,42 @@ public class Player : MonoBehaviour
         Shooting();
     }
 
-    void Movement() {
+    void Movement()
+    {
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
         transform.Translate(new Vector3(horizontalInput, verticalInput, 0) * Time.deltaTime * speed);
-
-        if (transform.position.x > 11.5f || transform.position.x <= -11.5f)
+        if (transform.position.x > horizontalScreenSize || transform.position.x <= -horizontalScreenSize)
         {
             transform.position = new Vector3(transform.position.x * -1, transform.position.y, 0);
         }
-        /*
-        if (transform.position.y > 8.5f || transform.position.y <= -8.5f)
+        if (transform.position.y > verticalScreenSize || transform.position.y < -verticalScreenSize)
         {
             transform.position = new Vector3(transform.position.x, transform.position.y * -1, 0);
         }
-        */
-       // limits player movement vertically
-        if (transform.position.y >= 1f)
-        {
-            transform.position = new Vector3(transform.position.x, 1f, 0);
-        }
-        else if (transform.position.y <= -4f)
-        {
-            transform.position = new Vector3(transform.position.x, -4f, 0);
-        }
-        //limits player movement horizontally
-        if (transform.position.x >= 9.2f)
-        {
-            transform.position = new Vector3(9.2f, transform.position.y, 0);
-        }
-        else if (transform.position.x <= -9.2f)
-        {
-            transform.position = new Vector3(-9.2f, transform.position.y, 0);
-        }
     }
 
-    void Shooting() {
-        // if space pressed
+    void Shooting()
+    {
+        
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            // create bullet
             Instantiate(bullet, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
         }
+        
     }
 
+    
+    public void LoseALife()
+    {
+        lives--;
+        GameObject.Find("GameManager").GetComponent<GameManager>().SeeLives(1);
+        //lives -= 1;
+        //lives = lives - 1;
+        if (lives == 0)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+    
 }

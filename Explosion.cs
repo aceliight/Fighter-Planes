@@ -2,22 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy2 : MonoBehaviour
+public class Explosion : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
     {
-        
+        Destroy(this.gameObject, 3f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(new Vector3(1, 0, 0) * Time.deltaTime * 5f);
 
-        if (transform.position.x > 11.5f)
-        {
-            Destroy(this.gameObject);
-        }
     }
 }

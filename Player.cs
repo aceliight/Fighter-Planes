@@ -107,6 +107,8 @@ public class Player : MonoBehaviour
         speed = 6f;
         thruster.gameObject.SetActive(false);
         gameManager.UpdatePowerupText("");
+        //plays sound
+        gameManager.PlayPowerDown();
     }
 
     IEnumerator ShootingPowerDown()
@@ -114,6 +116,8 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(3f);
         shooting = 1;
         gameManager.UpdatePowerupText("");
+        //plays sound
+        gameManager.PlayPowerDown();
     }
 
     IEnumerator ShieldPowerDown()
@@ -121,6 +125,8 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(5f);
         shield.gameObject.SetActive(false);
         gameManager.UpdatePowerupText("");
+        //plays sound
+        gameManager.PlayPowerDown();
     }
 
     private void OnTriggerEnter2D(Collider2D whatIHit)

@@ -8,7 +8,7 @@ public class MovingObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -24,20 +24,21 @@ public class MovingObject : MonoBehaviour
             //I am the EnemyOne
             transform.Translate(new Vector3(0, 1, 0) * Time.deltaTime * 4f);
         }
-
-        if ((transform.position.y > 9f || transform.position.y <= -9f) && whatAmI != 3)
-        {
-            Destroy(this.gameObject);
-        }
-
-        
         else if (whatAmI == 3)
         {
             //I am the Cloud
             transform.Translate(new Vector3(0, -1, 0) * Time.deltaTime * Random.Range(3f, 6f));
         }
-
-  
+        else if (whatAmI == 4)
+        {
+            //I am the Powerup
+            transform.Translate(new Vector3(0, -1, 0) * Time.deltaTime * 6f);
+        }
+       
+        if ((transform.position.y > 9f || transform.position.y <= -9f) && whatAmI != 3)
+        {
+            Destroy(this.gameObject);
+        }
 
         if (transform.position.y <= -9f && whatAmI == 3)
         {
